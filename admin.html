@@ -306,8 +306,10 @@
 <div id="login-screen">
   <div class="login-box">
     <h1>[ ADMIN ACCESS ]</h1>
-    <p>Portfolio control panel — enter your admin key</p>
-    <label>Admin Password</label>
+    <p>Portfolio control panel — authenticate to continue</p>
+    <label>Username</label>
+    <input type="text" id="admin-username" placeholder="Enter username..." autocomplete="off" />
+    <label>Password</label>
     <input type="password" id="admin-password" placeholder="Enter password..." autocomplete="off" />
     <button class="btn-login" onclick="doLogin()">⟐ AUTHENTICATE</button>
     <p id="login-error">⚠ Invalid credentials. Access denied.</p>
@@ -552,22 +554,6 @@
       </div>
 
       <div class="form-section" style="margin-top:20px">
-        <h3>Resume PDF</h3>
-        <div id="resume-saved-indicator" style="display:none;margin-bottom:14px;padding:10px 14px;background:rgba(0,255,65,0.08);border:1px solid var(--green);border-radius:4px;font-size:12px;color:var(--green)">
-          ✓ Custom resume uploaded &amp; active
-          <button onclick="removeResume()" style="float:right;background:transparent;border:none;color:var(--red);cursor:pointer;font-family:'Fira Code',monospace;font-size:12px">✕ Remove</button>
-        </div>
-        <div class="form-row">
-          <label>Upload Resume PDF</label>
-          <input type="file" id="resume-upload-input" accept=".pdf,application/pdf"
-            style="background:var(--surface2);border:1px dashed var(--border);border-radius:4px;padding:24px;cursor:pointer;color:var(--text);width:100%" />
-          <p class="hint">Upload your PDF — stored in the browser, works after deploy. Max ~5MB recommended.</p>
-        </div>
-        <div id="resume-file-info" style="display:none;margin-top:10px;padding:10px 14px;background:var(--surface2);border-radius:4px;font-size:12px;color:#aaa"></div>
-        <button class="save-btn" onclick="saveResume()">[ SAVE &amp; ACTIVATE RESUME ]</button>
-      </div>
-
-      <div class="form-section" style="margin-top:20px">
         <h3>Certificate / Project Images</h3>
         <p style="color:#666;font-size:12px;margin-bottom:16px">Upload images and copy the generated data URL to paste into the certificates or projects JSON in their respective tabs.</p>
         <div class="form-row">
@@ -622,6 +608,7 @@
   // Default password (SHA-256 of "KabilanAdmin@2025")
   // Stored as hash so plain text isn't visible
   const DEFAULT_PASS_HASH = '0eb87985b3c02bbdcc599f88852a4760e841441bbb317728f587a3d45caceda0';
+  const DEFAULT_USER_HASH = 'e42d67cc56aa76c6b9472ba659a6c3a217e1174a1977ce4a727dc8afc122a81f';
 
   async function sha256(str) {
     const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
@@ -634,10 +621,11 @@
 
   /* ── LOGIN / LOGOUT ── */
   async function doLogin() {
-    const input = document.getElementById('admin-password').value;
-    if (!input) return;
-    const hash = await sha256(input);
-    if (hash === getStoredHash()) {
+    const userInput = document.getElementById('admin-username').value;
+    const passInput = document.getElementById('admin-password').value;
+    if (!userInput || !passInput) return;
+    const [userHash, passHash] = await Promise.all([sha256(userInput), sha256(passInput)]);
+    if (userHash === DEFAULT_USER_HASH && passHash === getStoredHash()) {
       sessionStorage.setItem(SESSION_KEY, '1');
       document.getElementById('login-screen').style.display = 'none';
       document.getElementById('admin-panel').style.display = 'block';
@@ -651,6 +639,9 @@
 
   document.getElementById('admin-password').addEventListener('keydown', e => {
     if (e.key === 'Enter') doLogin();
+  });
+  document.getElementById('admin-username').addEventListener('keydown', e => {
+    if (e.key === 'Enter') document.getElementById('admin-password').focus();
   });
 
   function doLogout() {
@@ -912,44 +903,6 @@
       };
       reader.readAsDataURL(file);
     });
-
-    // Resume upload preview
-    document.getElementById('resume-upload-input').addEventListener('change', function() {
-      const file = this.files[0];
-      if (!file) return;
-      const info = document.getElementById('resume-file-info');
-      info.style.display = 'block';
-      info.textContent = `📄 ${file.name}  (${(file.size/1024).toFixed(1)} KB)`;
-    });
-
-    // Show indicator if resume already saved
-    if (localStorage.getItem('portfolio_resume')) {
-      document.getElementById('resume-saved-indicator').style.display = 'block';
-    }
-  }
-
-  function saveResume() {
-    const input = document.getElementById('resume-upload-input');
-    const file  = input.files[0];
-    if (!file) { showToast('⚠ Please select a PDF file first.', true); return; }
-    if (file.size > 8 * 1024 * 1024) { showToast('⚠ File too large (max 8MB).', true); return; }
-    const reader = new FileReader();
-    reader.onload = e => {
-      localStorage.setItem('portfolio_resume', e.target.result);
-      localStorage.setItem('portfolio_resume_name', file.name);
-      document.getElementById('resume-saved-indicator').style.display = 'block';
-      showToast('[✓] Resume saved! Download button now uses this file.');
-    };
-    reader.readAsDataURL(file);
-  }
-
-  function removeResume() {
-    localStorage.removeItem('portfolio_resume');
-    localStorage.removeItem('portfolio_resume_name');
-    document.getElementById('resume-saved-indicator').style.display = 'none';
-    document.getElementById('resume-file-info').style.display = 'none';
-    document.getElementById('resume-upload-input').value = '';
-    showToast('[✓] Resume removed. Default file will be used.');
   }
 
   async function saveProfilePhoto() {

@@ -280,5 +280,30 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- Admin Secret Popup -->
+  <div id="admin-popup" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:99999;align-items:center;justify-content:center;">
+    <div style="background:#12121f;border:1px solid #00ff41;border-radius:8px;padding:36px 40px;text-align:center;box-shadow:0 0 40px rgba(0,255,65,0.2);max-width:340px;width:90%;font-family:'Fira Code',monospace;">
+      <div style="color:#00ff41;font-size:11px;letter-spacing:3px;margin-bottom:8px;">[ SYSTEM ALERT ]</div>
+      <div style="color:#00ff41;font-family:'Orbitron',sans-serif;font-size:16px;letter-spacing:2px;margin-bottom:10px;">ADMIN ACCESS</div>
+      <p style="color:#666;font-size:12px;margin-bottom:28px;">Restricted area detected. Authenticate to proceed.</p>
+      <a href="admin.html" style="display:block;background:transparent;border:1px solid #00ff41;color:#00ff41;font-family:'Fira Code',monospace;font-size:13px;padding:12px;border-radius:4px;text-decoration:none;letter-spacing:1px;transition:all 0.2s;" onmouseover="this.style.background='rgba(0,255,65,0.1)'" onmouseout="this.style.background='transparent'">⟐ ENTER ADMIN PANEL</a>
+      <button onclick="document.getElementById('admin-popup').style.display='none'" style="margin-top:14px;background:transparent;border:none;color:#444;font-family:'Fira Code',monospace;font-size:11px;cursor:pointer;letter-spacing:1px;">[ ESC to dismiss ]</button>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var popup = document.getElementById('admin-popup');
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+          popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
+        }
+        if (e.key === 'Escape') popup.style.display = 'none';
+      });
+      popup.addEventListener('click', function(e) {
+        if (e.target === popup) popup.style.display = 'none';
+      });
+    })();
+  </script>
 </body>
 </html>
