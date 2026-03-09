@@ -295,7 +295,7 @@
     (function() {
       var popup = document.getElementById('admin-popup');
       document.addEventListener('keydown', function(e) {
-        if (e.altKey && e.ctrlKey && e.shiftKey && e.key === 'A') {
+        if (e.altKey && e.ctrlKey && e.shiftKey && (e.key === 'A' || e.key === 'a' || e.code === 'KeyA')) {
           popup.style.display = popup.style.display === 'flex' ? 'none' : 'flex';
         }
         if (e.key === 'Escape') popup.style.display = 'none';
