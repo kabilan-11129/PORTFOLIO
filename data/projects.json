@@ -1,0 +1,24 @@
+{
+  "projects": [
+    {
+      "title": "Doctor-AI: Health Assistant",
+      "description": "Developed a web-based health assistant that provides basic health suggestions based on symptoms entered by users. The application integrates a Flask backend with a responsive HTML, CSS, and JavaScript frontend to process user inputs and display possible health conditions. It uses a rule-based symptom mapping system to analyze symptoms and provide general health guidance.",
+      "technologies": ["Python", "Flask", "HTML", "CSS", "JavaScript"]
+    },
+    {
+      "title": "Memory Management Simulator",
+      "description": "Built a Python-based simulator to demonstrate core Operating System memory management concepts. The project implements techniques such as Paging, Segmentation, and Virtual Memory to illustrate how memory allocation and management work in an operating system. It also integrates the FIFO page replacement algorithm to visualize page faults and memory allocation behavior.",
+      "technologies": ["Python", "OS Concepts", "Paging", "Segmentation"]
+    },
+    {
+      "title": "Password Strength Checker",
+      "description": "Developed a Python command-line tool that evaluates the strength of user passwords. The program analyzes password characteristics such as length, use of uppercase and lowercase letters, numbers, and special characters. Based on these parameters, it provides feedback and recommendations to help users create stronger and more secure passwords.",
+      "technologies": ["Python", "CLI", "Security"]
+    },
+    {
+      "title": "UNBAD – Network Activity Detector",
+      "description": "Developed a cybersecurity tool designed to detect unauthorized background network activity on a system. The program monitors running processes and analyzes their network connections to identify suspicious or hidden activities. It helps users detect potentially malicious applications that may transmit data without their knowledge and provides logs and alerts to improve system security monitoring.",
+      "technologies": ["Python", "Networking", "Process Monitoring", "Cybersecurity"]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "name": "Kabilan",
+  "title": "B.Tech CSE (Cybersecurity) — II Year",
+  "taglines": [
+    "Cybersecurity",
+    "Web Development",
+    "Python Developer",
+    "Network Security",
+    "Ethical Hacking"
+  ],
+  "intro": "B.Tech CSE (Cybersecurity) student at SRM Institute of Science and Technology, Chennai. Passionate about cybersecurity, web development, and building tools that make the digital world safer.",
+  "bio": "I'm a second-year B.Tech Computer Science (Cybersecurity) student at SRM Institute of Science and Technology, Chennai, India. I work with Python, Java, Flask, and web technologies to build security tools and web applications. I'm passionate about networking, reconnaissance, cryptography, and developing solutions that strengthen digital security. Currently exploring ethical hacking and cybersecurity concepts while building real-world projects.",
+  "social": {
+    "github": "https://github.com/kabilan-11129",
+    "linkedin": "https://linkedin.com",
+    "email": "kabilan.sengathir@gmail.com",
+    "twitter": "https://twitter.com"
+  },
+  "resumeFile": "assets/resume.pdf",
+  "profileImage": "assets/images/profile.jpg"
+}

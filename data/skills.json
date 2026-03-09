@@ -1,0 +1,40 @@
+{
+  "categories": [
+    {
+      "name": "Programming",
+      "icon": "💻",
+      "skills": [
+        { "name": "Python", "level": 85 },
+        { "name": "Java", "level": 80 },
+        { "name": "HTML / CSS", "level": 75 },
+        { "name": "JavaScript", "level": 80 },
+        { "name": "Flask", "level": 70},
+        { "name": "MySQL / SQL", "level": 65 }
+      ]
+    },
+    {
+      "name": "Cybersecurity",
+      "icon": "🛡️",
+      "skills": [
+        { "name": "Networking Basics", "level": 75 },
+        { "name": "Reconnaissance", "level": 70 },
+        { "name": "Basic Cryptography", "level": 65 },
+        { "name": "Network Monitoring", "level": 70 },
+        { "name": "Password Security", "level": 75 },
+        { "name": "Threat Detection", "level": 65 }
+      ]
+    },
+    {
+      "name": "Tools & Platforms",
+      "icon": "🔧",
+      "skills": [
+        { "name": "Git / GitHub", "level": 80 },
+        { "name": "Linux", "level": 70 },
+        { "name": "Operating Systems", "level": 75 },
+        { "name": "DBMS", "level": 65 },
+        { "name": "Computer Networks", "level": 70 },
+        { "name": "VS Code", "level": 85 }
+      ]
+    }
+  ]
+}

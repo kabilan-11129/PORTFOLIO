@@ -1,0 +1,18 @@
+{
+  "certificates": [
+    {
+      "name": "Full-Stack (MERN) App/Web Development",
+      "issuer": "Certification Program",
+      "date": "2025",
+      "image": "",
+      "link": "#"
+    },
+    {
+      "name": "Data Analytics Traineeship",
+      "issuer": "Traineeship Program",
+      "date": "2025",
+      "image": "",
+      "link": "#"
+    }
+  ]
+}
